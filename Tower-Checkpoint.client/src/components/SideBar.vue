@@ -34,17 +34,35 @@
             </router-link>
           </li>
         </ul>
+        <div class="text-center pt-5">
+          <button
+            class="btn btn-warning col-9"
+            data-bs-toggle="modal"
+            data-bs-target="#create-event"
+          >
+            Create
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
+  <Modal id="create-event">
+    <template #modal-title>
+      <h4>Create Event</h4>
+    </template>
+    <template #modal-body>
+      <EventForm />
+    </template>
+  </Modal>
 </template>
 
 
 <script>
+
 export default {
   setup() {
     return {
-
     }
   }
 }

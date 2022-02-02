@@ -9,24 +9,37 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 p-5">
-        <div class="hero-image rounded">
+      <div class="col-12 p-4">
+        <div class="hero-image rounded border border-info border-3">
           <div class="hero-text text-white font-monospace p-4 fs-4">
             <p>Get ahead of the scalpers.</p>
             <p>Reserve your seat now with</p>
             <p>Real events for real people</p>
           </div>
         </div>
-        <div class="pt-5 px-1">
-          <div class="col-3">
-            <div class="card" style="width: 18rem">
-              <img src="..." class="card-img-top" alt="..." />
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-3 p-4" v-for="e in events" :key="e.i" d>
+            <div class="card border border-info border-3">
+              <img :src="e.coverImg" class="card-img-top" alt="eventPic" />
               <div class="card-body">
-                <h5 class="card-title"></h5>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                <h5
+                  class="card-title text-uppercase font-monospace fw-bold fs-4"
+                >
+                  {{ e.name }}
+                </h5>
+                <p class="font-monospace fs-6">{{ e.location }}</p>
+                <p class="font-monospace fs-6">
+                  {{ new Date(e.startDate).toDateString() }}
                 </p>
+                <p class="card-text"></p>
+                <div class="d-flex justify-content-end">
+                  <p class="pe-4 text-info fs-5 fw-bold font-monospace">
+                    {{ e.capacity }}
+                  </p>
+                  <p class="fs-5 fw-bold font-monospace">Spots Left</p>
+                </div>
               </div>
             </div>
           </div>
@@ -45,7 +58,7 @@ import { AppState } from "../AppState"
 export default {
   name: 'Home',
   setup() {
-    onMounted(() => {
+    onMounted(async () => {
       try {
         await towerEventService.getAllEvents()
       } catch (error) {

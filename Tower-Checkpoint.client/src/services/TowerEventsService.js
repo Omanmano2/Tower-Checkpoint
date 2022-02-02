@@ -3,9 +3,10 @@ import { logger } from "../utils/Logger";
 import { api } from "./AxiosService";
 
 class TowerEventsService {
-  async getAllEvents(query = {}) {
-    const res = await api.get('api/events' + query)
+  async getAllEvents() {
+    const res = await api.get('api/events')
     logger.log('Grabbing all events', res.data)
+    AppState.events = res.data
   }
 
   async createEvent(newEvent) {
